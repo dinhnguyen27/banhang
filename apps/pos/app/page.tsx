@@ -1,0 +1,1 @@
+export default function POSHome(){return(<h1>POS System</h1>)}
