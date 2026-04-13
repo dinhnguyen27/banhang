@@ -1,1 +1,22 @@
-const express=require('express');const app=express();app.use(express.json());app.get('/',(req,res)=>res.send('API running'));app.listen(4000,()=>console.log('Server 4000'));
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');
+const authRoutes = require('./routes/auth.routes');
+
+dotenv.config();
+
+connectDB();
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.use('/api/auth', authRoutes);
+
+app.get('/', (req, res) => res.send('API running'));
+
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
